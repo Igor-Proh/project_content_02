@@ -4,16 +4,20 @@ import lombok.*;
 
 import javax.persistence.*;
 
-//@Data
-//@Builder
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Getter
-//@Setter
-//@ToString
-//@Entity
-//@Table(name = "role")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@Entity
+@Table(name = "role")
 public class Role {
+
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
