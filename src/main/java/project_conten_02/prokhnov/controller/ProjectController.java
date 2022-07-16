@@ -6,6 +6,7 @@ import project_conten_02.prokhnov.model.Component;
 import project_conten_02.prokhnov.model.Project;
 import project_conten_02.prokhnov.service.ProjectService;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -25,12 +26,14 @@ public class ProjectController {
     }
 
     @PostMapping(value = "/projects")
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_EDITOR"})
     public Project createNewProject(@RequestBody Project project){
         projectService.saveProject(project);
         return project;
     }
 
     @PutMapping(value = "/projects")
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_EDITOR"})
     public Project updateProject(@RequestBody Project project){
         projectService.saveProject(project);
         return project;
@@ -42,6 +45,7 @@ public class ProjectController {
     }
 
     @DeleteMapping(value = "/projects/{projectId}")
+    @RolesAllowed("ROLE_EDITOR")
     public String deleteProjectById(@PathVariable long projectId){
         return projectService.deleteById(projectId);
     }

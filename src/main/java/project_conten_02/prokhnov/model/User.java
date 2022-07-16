@@ -1,4 +1,4 @@
-package project_conten_02.prokhnov.security;
+package project_conten_02.prokhnov.model;
 
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -24,7 +24,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int userId;
+    private long userId;
 
     @Column(name = "user_login_name")
     @NotEmpty(message = "User login name is required!")
@@ -60,6 +60,21 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    public void addRole(Role role) {
+        if (roles == null) {
+            roles = new HashSet<>();
+        }
+        roles.add(role);
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

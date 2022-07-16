@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,6 +19,7 @@ import project_conten_02.prokhnov.security.JwtTokenFilter;
 import javax.servlet.http.HttpServletResponse;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserRepository userRepository;

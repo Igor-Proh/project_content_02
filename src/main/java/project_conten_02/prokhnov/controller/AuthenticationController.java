@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import project_conten_02.prokhnov.dto.AuthenticationRequestDto;
 import project_conten_02.prokhnov.dto.AuthenticationResponseDto;
 import project_conten_02.prokhnov.security.JwtTokenUtil;
-import project_conten_02.prokhnov.security.User;
+import project_conten_02.prokhnov.model.User;
 
 import javax.validation.Valid;
 
@@ -24,6 +24,7 @@ public class AuthenticationController {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
     }
+
     @PostMapping("/authentication/login")
     public ResponseEntity<?> login(@RequestBody @Valid AuthenticationRequestDto request) {
         try {
@@ -42,6 +43,4 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-
-
 }

@@ -1,4 +1,5 @@
 package project_conten_02.prokhnov.security;
+
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -6,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import io.jsonwebtoken.Claims;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,12 +16,15 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import project_conten_02.prokhnov.model.Role;
+import project_conten_02.prokhnov.model.User;
 
 
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
     private final JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
     public JwtTokenFilter(JwtTokenUtil jwtTokenUtil) {
         this.jwtTokenUtil = jwtTokenUtil;
     }
@@ -58,7 +64,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         UserDetails userDetails = getUserDetails(token);
 
         UsernamePasswordAuthenticationToken
-                authentication = new UsernamePasswordAuthenticationToken(userDetails, null, null);
+                authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
         authentication.setDetails(
                 new WebAuthenticationDetailsSource().buildDetails(request));
@@ -68,7 +74,18 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     private UserDetails getUserDetails(String token) {
         User userDetails = new User();
-        String[] jwtSubject = jwtTokenUtil.getSubject(token).split(",");
+        Claims claims = jwtTokenUtil.parseClaims(token);
+        String subject = (String) claims.get(Claims.SUBJECT);
+        String roles = (String) claims.get("role");
+
+        roles = roles.replace("[", "").replace("]", "");
+        String[] roleNames = roles.split(",");
+
+        for (String aRoleName : roleNames) {
+            userDetails.addRole(new Role(aRoleName));
+        }
+
+        String[] jwtSubject = subject.split(",");
 
         userDetails.setUserId(Integer.parseInt(jwtSubject[0]));
         userDetails.setUserEmail(jwtSubject[1]);

@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import project_conten_02.prokhnov.model.User;
 
 import java.util.Date;
 
@@ -19,6 +20,7 @@ public class JwtTokenUtil {
         return Jwts.builder()
                 .setSubject(String.format("%s,%s", user.getUserId(), user.getUserEmail()))
                 .setIssuer("ProjectContent")
+                .claim("role", user.getRoles().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE_DURATION))
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
@@ -49,7 +51,7 @@ public class JwtTokenUtil {
         return parseClaims(token).getSubject();
     }
 
-    private Claims parseClaims(String token) {
+    public Claims parseClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)

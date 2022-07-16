@@ -1,4 +1,4 @@
-package project_conten_02.prokhnov.security;
+package project_conten_02.prokhnov.model;
 
 import lombok.*;
 
@@ -15,10 +15,14 @@ import javax.persistence.*;
 @Table(name = "role")
 public class Role {
 
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
-    private int roleId;
+    private long roleId;
 
     @Column(name = "role_name")
     private String roleName;
