@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/users")
-    @RolesAllowed("ROLE_ADMIN")
+//    @RolesAllowed("ROLE_ADMIN")
     public List<User> getAllUsers(){
         return userService.findAll();
     }

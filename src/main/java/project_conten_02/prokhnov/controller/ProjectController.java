@@ -21,19 +21,20 @@ public class ProjectController {
     }
 
     @GetMapping(value = "/projects")
+//    @RolesAllowed(value = "ROLE_ADMIN")
     public List<Project> getAllProjects() {
         return projectService.findAll();
     }
 
     @PostMapping(value = "/projects")
-    @RolesAllowed({"ROLE_ADMIN", "ROLE_EDITOR"})
+//    @RolesAllowed({"ROLE_ADMIN", "ROLE_EDITOR"})
     public Project createNewProject(@RequestBody Project project){
         projectService.saveProject(project);
         return project;
     }
 
     @PutMapping(value = "/projects")
-    @RolesAllowed({"ROLE_ADMIN", "ROLE_EDITOR"})
+//    @RolesAllowed({"ROLE_ADMIN", "ROLE_EDITOR"})
     public Project updateProject(@RequestBody Project project){
         projectService.saveProject(project);
         return project;
@@ -45,7 +46,7 @@ public class ProjectController {
     }
 
     @DeleteMapping(value = "/projects/{projectId}")
-    @RolesAllowed("ROLE_EDITOR")
+//    @RolesAllowed("ROLE_EDITOR")
     public String deleteProjectById(@PathVariable long projectId){
         return projectService.deleteById(projectId);
     }

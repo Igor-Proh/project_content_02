@@ -13,7 +13,7 @@ import java.util.Date;
 public class JwtTokenUtil {
     private static final long EXPIRE_DURATION = 24 * 60 * 60 * 1000;
 
-    @Value("asdadfadsf1f231af31a6f165af435af1a13")
+    @Value("abcdefghijklmnOPQRSTUVWXYZ")
     private String SECRET_KEY;
 
     public String generateAccessToken(User user) {

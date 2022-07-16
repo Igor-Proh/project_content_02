@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 username -> userRepository.findByUserEmail(username)
                         .orElseThrow(
                                 () -> new UsernameNotFoundException("User " + username + " not found.")));
+
     }
 
     @Bean

@@ -10,5 +10,4 @@ import lombok.*;
 public class AuthenticationResponseDto {
     private String email;
     private String accessToken;
-
 }
