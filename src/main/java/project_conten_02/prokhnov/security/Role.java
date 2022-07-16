@@ -15,10 +15,6 @@ import javax.persistence.*;
 @Table(name = "role")
 public class Role {
 
-    public Role(String roleName) {
-        this.roleName = roleName;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
