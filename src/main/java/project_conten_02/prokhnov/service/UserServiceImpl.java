@@ -1,10 +1,7 @@
 package project_conten_02.prokhnov.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project_conten_02.prokhnov.ProjectNotFoundException;
-import project_conten_02.prokhnov.UserNotFoundException;
-import project_conten_02.prokhnov.model.Project;
+import project_conten_02.prokhnov.exceptions.UserNotFoundException;
 import project_conten_02.prokhnov.model.User;
 import project_conten_02.prokhnov.repository.UserRepository;
 

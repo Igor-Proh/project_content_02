@@ -6,7 +6,6 @@ import project_conten_02.prokhnov.model.Component;
 import project_conten_02.prokhnov.model.Project;
 import project_conten_02.prokhnov.service.ProjectService;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController

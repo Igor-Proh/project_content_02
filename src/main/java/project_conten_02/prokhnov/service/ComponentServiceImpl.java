@@ -2,7 +2,7 @@ package project_conten_02.prokhnov.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import project_conten_02.prokhnov.ComponentNotFoundException;
+import project_conten_02.prokhnov.exceptions.ComponentNotFoundException;
 import project_conten_02.prokhnov.model.Component;
 import project_conten_02.prokhnov.repository.ComponentRepository;
 

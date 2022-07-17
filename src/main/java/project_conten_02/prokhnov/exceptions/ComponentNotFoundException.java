@@ -1,4 +1,4 @@
-package project_conten_02.prokhnov;
+package project_conten_02.prokhnov.exceptions;
 
 public class ComponentNotFoundException extends RuntimeException {
     public ComponentNotFoundException() {
