@@ -45,4 +45,16 @@ public class ControllersAspect {
         System.out.println(ARR + joinPoint.getSignature().getName()
                 + ARR + joinPoint.getSignature().getDeclaringTypeName());
     }
+
+    @Before("execution(public * project_conten_02.prokhnov.controller.*.upload* (..))")
+    public void logBeforeUpload(JoinPoint joinPoint) {
+        System.out.println(ARR + joinPoint.getSignature().getName()
+                + ARR + joinPoint.getSignature().getDeclaringTypeName());
+    }
+
+    @Before("execution(public * project_conten_02.prokhnov.controller.*.download* (..))")
+    public void logBeforeDownload(JoinPoint joinPoint) {
+        System.out.println(ARR + joinPoint.getSignature().getName()
+                + ARR + joinPoint.getSignature().getDeclaringTypeName());
+    }
 }

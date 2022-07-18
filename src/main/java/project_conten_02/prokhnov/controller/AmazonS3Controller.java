@@ -22,7 +22,7 @@ public class AmazonS3Controller {
     }
 
     @GetMapping("/files")
-    public ResponseEntity<List<String>> getListOfFiles() {
+    public ResponseEntity<List<String>> getAllFiles() {
         return new ResponseEntity<>(service.listFiles(), HttpStatus.OK);
     }
 
