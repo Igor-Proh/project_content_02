@@ -6,6 +6,7 @@ import project_conten_02.prokhnov.model.Component;
 import project_conten_02.prokhnov.model.Project;
 import project_conten_02.prokhnov.service.ProjectService;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -20,20 +21,19 @@ public class ProjectController {
     }
 
     @GetMapping(value = "/projects")
-//    @RolesAllowed(value = "ROLE_ADMIN")
+    @RolesAllowed(value = "ROLE_ADMIN")
     public List<Project> getAllProjects() {
         return projectService.findAll();
     }
 
     @PostMapping(value = "/projects")
-//    @RolesAllowed({"ROLE_ADMIN", "ROLE_EDITOR"})
     public Project createNewProject(@RequestBody Project project){
         projectService.saveProject(project);
         return project;
     }
 
     @PutMapping(value = "/projects")
-//    @RolesAllowed({"ROLE_ADMIN", "ROLE_EDITOR"})
+    @RolesAllowed({"ROLE_ADMIN"})
     public Project updateProject(@RequestBody Project project){
         projectService.saveProject(project);
         return project;
@@ -45,7 +45,7 @@ public class ProjectController {
     }
 
     @DeleteMapping(value = "/projects/{projectId}")
-//    @RolesAllowed("ROLE_EDITOR")
+    @RolesAllowed({"ROLE_ADMIN"})
     public String deleteProjectById(@PathVariable long projectId){
         return projectService.deleteById(projectId);
     }
@@ -56,6 +56,7 @@ public class ProjectController {
     }
 
     @PostMapping(value = "/projects/{projectId}/components")
+    @RolesAllowed({"ROLE_ADMIN"})
     public Component addComponentToProject(@PathVariable long projectId, @RequestBody Component component){
         Project project = projectService.getById(projectId);
         project.addComponent(component);

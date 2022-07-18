@@ -19,18 +19,19 @@ public class UserController {
     }
 
     @GetMapping(value = "/users")
-//    @RolesAllowed("ROLE_ADMIN")
     public List<User> getAllUsers(){
         return userService.findAll();
     }
 
     @PostMapping(value = "/users")
+    @RolesAllowed({"ROLE_ADMIN"})
     public User createNewUser(@RequestBody User user){
         userService.saveUser(user);
         return user;
     }
 
     @PutMapping(value = "/users")
+    @RolesAllowed({"ROLE_ADMIN"})
     public User updateUser(@RequestBody User user){
         userService.saveUser(user);
         return user;
@@ -42,6 +43,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/users/{userId}")
+    @RolesAllowed({"ROLE_ADMIN"})
     public String deleteUserById(@PathVariable long userId){
         return userService.deleteById(userId);
     }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import project_conten_02.prokhnov.model.Component;
 import project_conten_02.prokhnov.service.ComponentService;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,7 @@ public class ComponentController {
     }
 
     @PutMapping(value = "/components")
+    @RolesAllowed({"ROLE_ADMIN"})
     public Component updateComponent(@RequestBody Component component) {
         componentService.saveComponent(component);
         return component;
@@ -41,6 +43,7 @@ public class ComponentController {
     }
 
     @DeleteMapping("/components/{componentId}")
+    @RolesAllowed({"ROLE_ADMIN"})
     public String deleteComponentById(@PathVariable long componentId){
         return componentService.deleteById(componentId);
     }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import project_conten_02.prokhnov.service.AmazonS3Service;
 
+import javax.annotation.security.RolesAllowed;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class AmazonS3Controller {
     }
 
     @DeleteMapping(value = "/files/{filename}")
+    @RolesAllowed({"ROLE_ADMIN"})
     public ResponseEntity<String> deleteFile(@PathVariable("filename") String filename) {
         return new ResponseEntity<>(service.deleteFile(filename), HttpStatus.OK);
     }
